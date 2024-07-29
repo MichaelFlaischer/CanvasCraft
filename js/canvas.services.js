@@ -54,9 +54,16 @@ function getMousePos(e) {
   const scaleX = gElCanvas.width / rect.width
   const scaleY = gElCanvas.height / rect.height
 
-  return {
-    x: (e.offsetX || e.touches[0].clientX) * scaleX,
-    y: (e.offsetY || e.touches[0].clientY) * scaleY,
+  if (e.touches) {
+    return {
+      x: (e.touches[0].clientX - rect.left) * scaleX,
+      y: (e.touches[0].clientY - rect.top) * scaleY,
+    }
+  } else {
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    }
   }
 }
 
