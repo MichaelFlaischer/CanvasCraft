@@ -26,6 +26,10 @@ function onInitCanv() {
   gElCanvas.addEventListener('touchstart', startDrawing)
   gElCanvas.addEventListener('touchend', stopDrawing)
   gElCanvas.addEventListener('touchmove', draw)
+  gElCanvas.addEventListener('touchstart', preventDefault)
+  gElCanvas.addEventListener('touchmove', preventDefault)
+  gElCanvas.addEventListener('touchend', preventDefault)
+  gElCanvas.addEventListener('touchcancel', preventDefault)
   //   gElCanvas.addEventListener('mousedown', logMousePos)
 }
 
@@ -112,3 +116,7 @@ function drawStar(cx, cy, spikes, outerRadius, innerRadius) {
 }
 
 function logMousePos(e) {}
+
+function preventDefault(e) {
+  e.preventDefault()
+}
