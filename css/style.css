@@ -35,7 +35,7 @@ main {
   padding: 2rem;
 }
 
-.container {
+.main-container {
   grid-column: 2 / 3;
   padding: 1rem;
 }
