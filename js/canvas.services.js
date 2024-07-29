@@ -1,6 +1,16 @@
 var gElCanvas
 var gCtx
 
+let lastPos = null
+let lastTime = null
+let sizeShape = null
+let drawing = false
+let color = '#000'
+let shape = 'circle'
+let isPencil = false
+let lastDrawTime = 0
+const drawInterval = 40
+
 function onInitCanv() {
   gElCanvas = document.querySelector('#canvas')
   gCtx = gElCanvas.getContext('2d')
@@ -26,14 +36,7 @@ function onInitCanv() {
   gElCanvas.addEventListener('touchstart', startDrawing)
   gElCanvas.addEventListener('touchend', stopDrawing)
   gElCanvas.addEventListener('touchmove', draw)
-
-  //   gElCanvas.addEventListener('mousedown', logMousePos)
 }
-
-let drawing = false
-let color = '#000'
-let shape = 'circle'
-let isPencil = false
 
 function startDrawing(e) {
   drawing = true
@@ -43,27 +46,6 @@ function startDrawing(e) {
 function stopDrawing() {
   drawing = false
   gCtx.beginPath()
-}
-
-function draw(e) {
-  e.preventDefault()
-
-  if (!drawing) return
-
-  gCtx.lineWidth = isPencil ? 1 : 3
-  gCtx.strokeStyle = color
-  gCtx.fillStyle = color
-  gCtx.lineCap = 'round'
-
-  const pos = getMousePos(e)
-  if (isPencil) {
-    gCtx.lineTo(pos.x, pos.y)
-    gCtx.stroke()
-    gCtx.beginPath()
-    gCtx.moveTo(pos.x, pos.y)
-  } else {
-    drawShape(pos.x, pos.y)
-  }
 }
 
 function getMousePos(e) {
@@ -78,15 +60,81 @@ function getMousePos(e) {
   }
 }
 
+function logMouseSpeed(e) {
+  let posX
+  let posY
+
+  if (e.touches) {
+    posX = e.touches[0].clientX
+    posY = e.touches[0].clientY
+  } else {
+    posX = e.clientX
+    posY = e.clientY
+  }
+  const now = performance.now()
+
+  if (lastPos && lastTime) {
+    const dx = posX - lastPos.x
+    const dy = posY - lastPos.y
+    const dt = (now - lastTime) / 1000
+
+    const distance = Math.sqrt(dx * dx + dy * dy)
+    const speed = distance / dt
+
+    const minSpeed = 0
+    const maxSpeed = 1000
+    const mappedSpeed = Math.min(Math.max(Math.round(((speed - minSpeed) / (maxSpeed - minSpeed)) * 15) + 1, 1), 16)
+
+    lastPos = { x: posX, y: posY }
+    lastTime = now
+
+    return mappedSpeed
+  }
+
+  lastPos = { x: posX, y: posY }
+  lastTime = now
+
+  return 1
+}
+
+function draw(e) {
+  e.preventDefault()
+  const now = Date.now()
+
+  if (now - lastDrawTime < drawInterval) {
+    return
+  }
+
+  sizeShape = logMouseSpeed(e)
+  if (!drawing) return
+
+  gCtx.lineWidth = isPencil ? 0.5 : 0.9
+  gCtx.strokeStyle = color
+  gCtx.fillStyle = color
+  gCtx.lineCap = 'round'
+
+  const pos = getMousePos(e)
+  if (isPencil) {
+    gCtx.lineTo(pos.x, pos.y)
+    gCtx.stroke()
+    gCtx.beginPath()
+    gCtx.moveTo(pos.x, pos.y)
+  } else {
+    drawShape(pos.x, pos.y)
+  }
+
+  lastDrawTime = now
+}
+
 function drawShape(x, y) {
   if (shape === 'circle') {
     gCtx.beginPath()
-    gCtx.arc(x, y, 5, 0, Math.PI * 2)
-    gCtx.fill()
+    gCtx.arc(x, y, sizeShape, 0, Math.PI * 2)
+    gCtx.stroke()
   } else if (shape === 'rectangle') {
-    gCtx.fillRect(x, y, 10, 10)
+    gCtx.strokeRect(x, y, sizeShape, sizeShape)
   } else if (shape === 'star') {
-    drawStar(x, y, 5, 5, 10)
+    drawStar(x, y, 5, sizeShape, sizeShape * 2)
   }
 }
 
@@ -111,7 +159,5 @@ function drawStar(cx, cy, spikes, outerRadius, innerRadius) {
   }
   gCtx.lineTo(cx, cy - outerRadius)
   gCtx.closePath()
-  gCtx.fill()
+  gCtx.stroke()
 }
-
-function logMousePos(e) {}
