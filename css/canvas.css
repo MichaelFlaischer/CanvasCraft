@@ -1,0 +1,9 @@
+.toolbar {
+  margin-bottom: 20px;
+}
+
+canvas {
+  border: 1px solid black;
+  height: 80%;
+  width: 100%;
+}

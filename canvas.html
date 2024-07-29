@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CanvasCraft</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/canvas.css" />
+    <link rel="stylesheet" href="css/manu-bar.css" />
+  </head>
+  <body onload="onInit()">
+    <script src="js/utils.js"></script>
+    <script src="js/localStorage.js"></script>
+    <script src="js/canvas.controller.js"></script>
+    <script src="js/canvas.services.js"></script>
+    <script src="js/menu-bar.controller.js"></script>
+    <header>
+      <h1>Welcome to CanvasCraft</h1>
+    </header>
+    <nav></nav>
+    <main>
+      <div class="main-container">
+        <div class="toolbar">
+          <input type="color" id="colorPicker" />
+          <select id="shapePicker">
+            <option value="circle">Circle</option>
+            <option value="rectangle">Rectangle</option>
+            <option value="star">Star</option>
+          </select>
+          <button id="pencilButton">Pencil</button>
+        </div>
+        <canvas id="canvas"></canvas>
+        <button id="downloadButton">Download</button>
+        <button id="uploadButton">Upload</button>
+        <button id="shareButton">Share to Facebook</button>
+      </div>
+    </main>
+    <footer>
+      <h1><p>&copy; Michael Flaischer</p></h1>
+    </footer>
+  </body>
+</html>
