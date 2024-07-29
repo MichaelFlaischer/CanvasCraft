@@ -1,3 +1,5 @@
+'use strict'
+
 function getAngle(x1, y1, x2, y2) {
   var distY = Math.abs(y2 - y1)
   var distX = Math.abs(x2 - x1)

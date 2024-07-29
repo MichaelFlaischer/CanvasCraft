@@ -1,3 +1,5 @@
+'use strict'
+
 function menuRender() {
   const elNnav = document.querySelector('nav')
   elNnav.innerHTML = `

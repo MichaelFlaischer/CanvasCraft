@@ -1,3 +1,5 @@
+'use strict'
+
 function onInit() {
   menuRender()
   onInitCanv()
