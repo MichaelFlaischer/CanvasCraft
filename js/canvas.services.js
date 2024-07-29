@@ -72,6 +72,7 @@ function logMouseSpeed(e) {
   let posY
 
   if (e.touches) {
+    prompt('adsad')
     posX = e.touches[0].clientX
     posY = e.touches[0].clientY
   } else {
