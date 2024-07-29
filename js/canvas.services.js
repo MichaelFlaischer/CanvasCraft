@@ -65,9 +65,13 @@ function draw(e) {
 
 function getMousePos(e) {
   const rect = gElCanvas.getBoundingClientRect()
+
+  const scaleX = gElCanvas.width / rect.width
+  const scaleY = gElCanvas.height / rect.height
+
   return {
-    x: (e.clientX || e.touches[0].clientX) - rect.left,
-    y: (e.clientY || e.touches[0].clientY) - rect.top,
+    x: (e.offsetX || e.touches[0].clientX) * scaleX,
+    y: (e.offsetY || e.touches[0].clientY) * scaleY,
   }
 }
 
@@ -77,7 +81,7 @@ function drawShape(x, y) {
     gCtx.arc(x, y, 5, 0, Math.PI * 2)
     gCtx.fill()
   } else if (shape === 'rectangle') {
-    gCtx.fillRect(x - 30, y - 15, 10, 10)
+    gCtx.fillRect(x, y, 10, 10)
   } else if (shape === 'star') {
     drawStar(x, y, 5, 5, 10)
   }
