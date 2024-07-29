@@ -10,6 +10,7 @@ let shape = 'circle'
 let isPencil = false
 let lastDrawTime = 0
 const drawInterval = 40
+var aSine
 
 function onInitCanv() {
   gElCanvas = document.querySelector('#canvas')
@@ -92,6 +93,11 @@ function logMouseSpeed(e) {
     const maxSpeed = 1000
     const mappedSpeed = Math.min(Math.max(Math.round(((speed - minSpeed) / (maxSpeed - minSpeed)) * 15) + 1, 1), 16)
 
+    var distY = posY - lastPos.y
+    var distX = posX - lastPos.x
+
+    aSine = Math.atan2(distY, distX) * (180 / Math.PI)
+
     lastPos = { x: posX, y: posY }
     lastTime = now
 
@@ -121,6 +127,11 @@ function draw(e) {
   gCtx.lineCap = 'round'
 
   const pos = getMousePos(e)
+  gCtx.save()
+  gCtx.translate(pos.x, pos.y)
+  gCtx.rotate((aSine * Math.PI) / 180)
+  gCtx.translate(-pos.x, -pos.y)
+
   if (isPencil) {
     gCtx.lineTo(pos.x, pos.y)
     gCtx.stroke()
@@ -129,6 +140,8 @@ function draw(e) {
   } else {
     drawShape(pos.x, pos.y)
   }
+
+  gCtx.restore()
 
   lastDrawTime = now
 }
