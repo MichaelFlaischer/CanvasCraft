@@ -22,7 +22,6 @@ body {
 header {
   width: 100%;
   background-color: var(--bg-color-light);
-  padding: 1rem;
   text-align: center;
   box-shadow: var(--box-shadow);
 }
@@ -43,7 +42,6 @@ main {
 footer {
   position: sticky;
   bottom: 0;
-  padding: 1rem;
   text-align: center;
   width: 100%;
   background-color: var(--bg-color-light);
