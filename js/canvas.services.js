@@ -26,10 +26,7 @@ function onInitCanv() {
   gElCanvas.addEventListener('touchstart', startDrawing)
   gElCanvas.addEventListener('touchend', stopDrawing)
   gElCanvas.addEventListener('touchmove', draw)
-  gElCanvas.addEventListener('touchstart', preventDefault)
-  gElCanvas.addEventListener('touchmove', preventDefault)
-  gElCanvas.addEventListener('touchend', preventDefault)
-  gElCanvas.addEventListener('touchcancel', preventDefault)
+
   //   gElCanvas.addEventListener('mousedown', logMousePos)
 }
 
@@ -49,6 +46,8 @@ function stopDrawing() {
 }
 
 function draw(e) {
+  e.preventDefault()
+
   if (!drawing) return
 
   gCtx.lineWidth = isPencil ? 1 : 3
@@ -74,8 +73,8 @@ function getMousePos(e) {
   const scaleY = gElCanvas.height / rect.height
 
   return {
-    x: (e.offsetX || e.touches[0].clientX) * scaleX,
-    y: (e.offsetY || e.touches[0].clientY) * scaleY,
+    x: (e.offsetX || e.touches[0].offsetX) * scaleX,
+    y: (e.offsetY || e.touches[0].offsetY) * scaleY,
   }
 }
 
@@ -116,7 +115,3 @@ function drawStar(cx, cy, spikes, outerRadius, innerRadius) {
 }
 
 function logMousePos(e) {}
-
-function preventDefault(e) {
-  e.preventDefault()
-}
