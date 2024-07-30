@@ -1,0 +1,23 @@
+.main-container {
+  grid-column: 2 / 3;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.about-content h2 {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  text-shadow: 2px 2px 5px #ffffff;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px #ffffff;
+}

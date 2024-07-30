@@ -12,6 +12,7 @@ function menuRender() {
             <li><a href="main.html">Home</a></li>
             <li><a href="canvas.html">Canvas</a></li>
             <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
           </ul>
         </div>
       `

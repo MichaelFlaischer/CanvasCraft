@@ -40,13 +40,19 @@
   font-size: 2em;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 580px) {
   .hero-content {
     font-size: 1.5em;
   }
 }
 
-@media (max-width: 400px), (max-height: 500px) {
+@media (max-width: 480px) {
+  .hero-content {
+    font-size: 1.25em;
+  }
+}
+
+@media (max-width: 430px), (max-height: 500px) {
   .hero-content {
     font-size: 1em;
   }

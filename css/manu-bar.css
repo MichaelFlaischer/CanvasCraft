@@ -45,11 +45,16 @@
 
 .nav-container ul {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   list-style: none;
   text-align: center;
+
+  font-family: 'Playwrite AT', cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .nav-container ul li {
