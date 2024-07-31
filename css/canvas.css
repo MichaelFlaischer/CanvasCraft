@@ -1,9 +1,90 @@
 .toolbar {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+}
+
+.toolbar input[type='color'],
+.toolbar select,
+.toolbar button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toolbar button:hover,
+.toolbar select:hover,
+.toolbar input[type='color']:hover {
+  background-color: #f0f0f0;
 }
 
 canvas {
-  border: 1px solid black;
+  border: 2px solid #000;
+  border-radius: 5px;
   height: 80%;
   width: 100%;
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
+input[type='color'] {
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}
+
+.bottom-toolbar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+}
+
+.bottom-toolbar button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bottom-toolbar button:hover {
+  background-color: #f0f0f0;
 }

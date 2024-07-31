@@ -1,37 +1,28 @@
 'use strict'
 
 var gElCanvas
-var gCtx
+var gElCanv
+
+var gCanvData = { color: '#000', shape: 'pencil', aSine: 1, insideFill: null, outsideFill: '#fdfdfd' }
 
 let lastPos = null
 let lastTime = null
 let sizeShape = null
 let drawing = false
 let color = '#000'
-let shape = 'circle'
-let isPencil = false
+let shape = 'pencil'
+var aSine
 let lastDrawTime = 0
 const drawInterval = 40
-var aSine
 
 function onInitCanv() {
   gElCanvas = document.querySelector('#canvas')
-  gCtx = gElCanvas.getContext('2d')
+  gElCanv = gElCanvas.getContext('2d')
 
-  gCtx.fillStyle = '#fdfdfd'
-  gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
-
-  document.getElementById('colorPicker').addEventListener('input', (e) => {
-    color = e.target.value
-  })
-
-  document.getElementById('shapePicker').addEventListener('change', (e) => {
-    shape = e.target.value
-  })
-
-  document.getElementById('pencilButton').addEventListener('click', () => {
-    isPencil = !isPencil
-  })
+  console.log(gElCanvas)
+  console.log(gElCanv)
+  gElCanv.fillStyle = '#fdfdfd'
+  gElCanv.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
 
   gElCanvas.addEventListener('mousedown', startDrawing)
   gElCanvas.addEventListener('mouseup', stopDrawing)
@@ -41,6 +32,20 @@ function onInitCanv() {
   gElCanvas.addEventListener('touchmove', draw)
 }
 
+function clearCanvas() {
+  gElCanv.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+  gElCanv.fillStyle = '#fdfdfd'
+  gElCanv.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function changePicker() {
+  shape = document.getElementById('shapePicker').value
+}
+
+function changeColor() {
+  color = document.getElementById('colorPicker').value
+}
+
 function startDrawing(e) {
   drawing = true
   draw(e)
@@ -48,7 +53,7 @@ function startDrawing(e) {
 
 function stopDrawing() {
   drawing = false
-  gCtx.beginPath()
+  gElCanv.beginPath()
 }
 
 function getMousePos(e) {
@@ -123,63 +128,20 @@ function draw(e) {
   sizeShape = logMouseSpeed(e)
   if (!drawing) return
 
-  gCtx.lineWidth = isPencil ? 0.5 : 0.9
-  gCtx.strokeStyle = color
-  gCtx.fillStyle = color
-  gCtx.lineCap = 'round'
+  gElCanv.lineWidth = shape === 'pencil' ? 0.5 : 0.9
+  gElCanv.strokeStyle = color
+  gElCanv.fillStyle = color
+  gElCanv.lineCap = 'round'
 
   const pos = getMousePos(e)
-  gCtx.save()
-  gCtx.translate(pos.x, pos.y)
-  gCtx.rotate((aSine * Math.PI) / 180)
-  gCtx.translate(-pos.x, -pos.y)
+  gElCanv.save()
+  gElCanv.translate(pos.x, pos.y)
+  gElCanv.rotate((aSine * Math.PI) / 180)
+  gElCanv.translate(-pos.x, -pos.y)
 
-  if (isPencil) {
-    gCtx.lineTo(pos.x, pos.y)
-    gCtx.stroke()
-    gCtx.beginPath()
-    gCtx.moveTo(pos.x, pos.y)
-  } else {
-    drawShape(pos.x, pos.y)
-  }
+  drawShape(pos.x, pos.y)
 
-  gCtx.restore()
+  gElCanv.restore()
 
   lastDrawTime = now
-}
-
-function drawShape(x, y) {
-  if (shape === 'circle') {
-    gCtx.beginPath()
-    gCtx.arc(x, y, sizeShape, 0, Math.PI * 2)
-    gCtx.stroke()
-  } else if (shape === 'rectangle') {
-    gCtx.strokeRect(x, y, sizeShape, sizeShape)
-  } else if (shape === 'star') {
-    drawStar(x, y, 5, sizeShape, sizeShape * 2)
-  }
-}
-
-function drawStar(cx, cy, spikes, outerRadius, innerRadius) {
-  let rot = Math.PI / 2
-  let x = cx
-  let y = cy
-  let step = Math.PI / spikes
-
-  gCtx.beginPath()
-  gCtx.moveTo(cx, cy - outerRadius)
-  for (let i = 0; i < spikes; i++) {
-    x = cx + Math.cos(rot) * outerRadius
-    y = cy - Math.sin(rot) * outerRadius
-    gCtx.lineTo(x, y)
-    rot += step
-
-    x = cx + Math.cos(rot) * innerRadius
-    y = cy - Math.sin(rot) * innerRadius
-    gCtx.lineTo(x, y)
-    rot += step
-  }
-  gCtx.lineTo(cx, cy - outerRadius)
-  gCtx.closePath()
-  gCtx.stroke()
 }
