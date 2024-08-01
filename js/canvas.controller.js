@@ -261,13 +261,54 @@ function drawCloud(canv, x, y, size, drawInside) {
   canv.stroke()
 }
 
-function downloadCanvas() {
+function getCanvasDataUR() {
   const canvas = document.querySelector('.canvas')
   const dataURL = canvas.toDataURL('image/png')
+  return dataURL
+}
+
+function downloadCanvas() {
+  const dataURL = getCanvasDataUR()
   const link = document.createElement('a')
   link.href = dataURL
   link.download = 'canvas_drawing.png'
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
+}
+
+function openSaveToGalleryDialog() {
+  const canvas = document.querySelector('.canvas')
+  const thumbnail = document.getElementById('canvasThumbnail')
+  thumbnail.src = canvas.toDataURL()
+  document.getElementById('saveToGalleryDialog').style.display = 'flex'
+}
+
+function closeSaveToGalleryDialog() {
+  document.getElementById('saveToGalleryDialog').style.display = 'none'
+}
+
+function onSavePainting(event) {
+  event.preventDefault()
+
+  const form = document.getElementById('savePaintingForm')
+  const paintingName = form.paintingName.value
+  const artistName = form.artistName.value
+  const artistEmail = form.artistEmail.value
+
+  savePaintingToGallery(paintingName, 'art', artistName, artistEmail)
+  showNotification('Painting saved successfully to gallery!')
+  console.log(getSavedPaintings())
+  closeSaveToGalleryDialog()
+}
+
+function showNotification(message) {
+  const notification = document.querySelector('.notification')
+  const notificationMessage = notification.querySelector('.notificationMessage')
+  notificationMessage.textContent = message
+  notification.classList.add('show')
+
+  setTimeout(() => {
+    notification.classList.remove('show')
+  }, 3000)
 }

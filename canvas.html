@@ -6,7 +6,7 @@
     <title>CanvasCraft</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/canvas.css" />
-    <link rel="stylesheet" href="css/manu-bar.css" />
+    <link rel="stylesheet" href="css/menu-bar.css" />
   </head>
   <body onload="onInit()">
     <script src="js/utils.js"></script>
@@ -91,11 +91,39 @@
           <button onclick="downloadCanvas()">Download</button>
           <button>Upload</button>
           <button>Share to Facebook</button>
+          <button onclick="openSaveToGalleryDialog()">Save to Gallery</button>
         </div>
       </div>
     </main>
     <footer>
       <h1><p>&copy; Michael Flaischer</p></h1>
     </footer>
+
+    <div id="saveToGalleryDialog" class="dialog" style="display: none">
+      <div class="dialog-content">
+        <span class="close" onclick="closeSaveToGalleryDialog()">&times;</span>
+        <h2>Save to Gallery</h2>
+        <img id="canvasThumbnail" src="" alt="Canvas Thumbnail" />
+        <form id="savePaintingForm" onsubmit="onSavePainting(event)">
+          <div class="input-group">
+            <label for="paintingName">Painting Name</label>
+            <input type="text" id="paintingName" name="paintingName" required />
+          </div>
+          <div class="input-group">
+            <label for="artistName">Artist Name</label>
+            <input type="text" id="artistName" name="artistName" required />
+          </div>
+          <div class="input-group">
+            <label for="artistEmail">Artist Email</label>
+            <input type="email" id="artistEmail" name="artistEmail" required />
+          </div>
+          <button type="submit">Save</button>
+          <button type="button" onclick="closeSaveToGalleryDialog()">Cancel</button>
+        </form>
+      </div>
+    </div>
+    <div class="notification" style="display: none">
+      <span class="notificationMessage"></span>
+    </div>
   </body>
 </html>

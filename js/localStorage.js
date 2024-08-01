@@ -14,7 +14,42 @@ function loadImageFromInput(ev, onImageReady) {
   reader.readAsDataURL(ev.target.files[0])
 }
 
-function renderImg(elImg) {
-  // Draw the img on the canvas
-  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+function downloadCanvas(elLink) {
+  const data = getCanvasDataUR()
+  elLink.href = data
+  elLink.download = 'my-canvas.png'
+}
+
+function savePaintingToGallery(paintingName, paintingType, artistName, artistEmail) {
+  const id = generateUniqueId()
+  const canvasData = getCanvasDataUR()
+  const date = new Date()
+  const painting = {
+    id,
+    name: paintingName,
+    type: paintingType,
+    artist: artistName,
+    email: artistEmail,
+    img: canvasData,
+    date: date.toLocaleDateString(),
+    time: date.toLocaleTimeString(),
+  }
+  const paintings = getSavedPaintings()
+  paintings.push(painting)
+  localStorage.setItem('paintings', JSON.stringify(paintings))
+}
+
+function getSavedPaintings() {
+  const paintings = localStorage.getItem('paintings')
+  return paintings ? JSON.parse(paintings) : []
+}
+
+function getArtPaintings() {
+  const paintings = getSavedPaintings()
+  return paintings.filter((painting) => painting.type.toLowerCase() === 'art')
+}
+
+function getMemePaintings() {
+  const paintings = getSavedPaintings()
+  return paintings.filter((painting) => painting.type.toLowerCase() === 'meme')
 }
