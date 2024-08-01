@@ -1,5 +1,3 @@
-/* css/canvas.css */
-
 .toolbar {
   display: flex;
   flex-direction: column;
@@ -15,6 +13,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .toolbar-row .input-group {
@@ -93,4 +92,189 @@ input[type='color'] {
   padding: 0;
   border: none;
   border-radius: 5px;
+}
+
+@media (max-width: 1200px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  .toolbar-row:first-child {
+    margin-right: 10px;
+  }
+
+  .toolbar-row:last-child {
+    margin-left: 10px;
+  }
+
+  canvas {
+    width: 80%;
+    height: 70%;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    width: 90%;
+    height: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    width: 95%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar-row {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar-row {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    width: 100%;
+    height: 40%;
+  }
+}
+
+@media (max-width: 320px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toolbar-row {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    width: 100%;
+    height: 30%;
+  }
+}
+
+@media (orientation: landscape) {
+  .main-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .first-toolbar {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    flex-direction: column;
+  }
+
+  .second-toolbar {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    flex-direction: column;
+  }
+
+  .third-toolbar {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  canvas {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    width: 100%;
+    height: 100%;
+  }
+
+  main {
+    grid-template-columns: 0fr 10fr 0fr;
+  }
 }

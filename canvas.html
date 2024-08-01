@@ -20,81 +20,77 @@
     <nav></nav>
     <main>
       <div class="main-container">
-        <div class="toolbar">
-          <div class="toolbar-row">
-            <div class="input-group">
-              <label for="shapePicker">Shape</label>
-              <select id="shapePicker" onchange="changePicker()">
-                <option value="pencil">Pencil</option>
-                <option value="circle">Circle</option>
-                <option value="rectangle">Rectangle</option>
-                <option value="star">Star</option>
-                <option value="triangle">Triangle</option>
-                <option value="ellipse">Ellipse</option>
-                <option value="heart">Heart</option>
-                <option value="pentagon">Pentagon</option>
-                <option value="hexagon">Hexagon</option>
-                <option value="diamond">Diamond</option>
-                <option value="octagon">Octagon</option>
-                <option value="arrow">Arrow</option>
-                <option value="cloud">Cloud</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label for="shapeSize">Size</label>
-              <input type="range" id="shapeSize" class="shape-size" min="1" max="40" value="20" oninput="changeShapeSize()" />
-              <span id="shapeSizeValue">20</span>
-            </div>
-            <div class="input-group">
-              <label for="shapeWidth">Width</label>
-              <input type="range" id="shapeWidth" class="shape-width" min="1" max="40" value="10" oninput="changeShapeWidth()" />
-              <span id="shapeWidthValue">10</span>
-            </div>
-            <div class="input-group">
-              <label for="innerColorPicker">Inner Color</label>
-              <input type="color" id="innerColorPicker" class="inner-color" onchange="changeInnerColor()" />
-            </div>
-            <div class="input-group">
-              <label for="outsideColorPicker">Outside Color</label>
-              <input type="color" id="outsideColorPicker" class="outside-color" onchange="changeOutsideColor()" />
-            </div>
+        <div class="toolbar toolbar-row first-toolbar">
+          <div class="input-group">
+            <label for="shapePicker">Shape</label>
+            <select id="shapePicker" onchange="changePicker()">
+              <option value="pencil">Pencil</option>
+              <option value="circle">Circle</option>
+              <option value="rectangle">Rectangle</option>
+              <option value="star">Star</option>
+              <option value="triangle">Triangle</option>
+              <option value="ellipse">Ellipse</option>
+              <option value="heart">Heart</option>
+              <option value="pentagon">Pentagon</option>
+              <option value="hexagon">Hexagon</option>
+              <option value="diamond">Diamond</option>
+              <option value="octagon">Octagon</option>
+              <option value="arrow">Arrow</option>
+              <option value="cloud">Cloud</option>
+            </select>
           </div>
-          <div class="toolbar-row">
-            <div class="input-group">
-              <label for="continuousPress">Continuous Press</label>
-              <select id="continuousPress" class="continuous-press" onchange="toggleContinuousPress()">
-                <option value="true">YES</option>
-                <option value="false">NO</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label for="fillShape">Fill Shape</label>
-              <select id="fillShape" class="fill-shape" onchange="toggleFillShape()">
-                <option value="true">YES</option>
-                <option value="false">NO</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label for="shapeSizeSpeed">Size by Mouse Speed</label>
-              <select id="shapeSizeSpeed" class="shape-size-speed" onchange="toggleShapeSizeSpeed()">
-                <option value="true">YES</option>
-                <option value="false">NO</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label for="drawInterval">Drawing Interval</label>
-              <input type="number" id="drawInterval" class="draw-interval" min="1" max="1000" value="40" onchange="changeDrawInterval()" />
-            </div>
+          <div class="input-group">
+            <label for="shapeSize">Size</label>
+            <input type="range" id="shapeSize" class="shape-size" min="1" max="40" value="20" oninput="changeShapeSize()" />
+            <span id="shapeSizeValue">20</span>
+          </div>
+          <div class="input-group">
+            <label for="shapeWidth">Width</label>
+            <input type="range" id="shapeWidth" class="shape-width" min="1" max="40" value="10" oninput="changeShapeWidth()" />
+            <span id="shapeWidthValue">10</span>
+          </div>
+          <div class="input-group">
+            <label for="innerColorPicker">Inner Color</label>
+            <input type="color" id="innerColorPicker" class="inner-color" onchange="changeInnerColor()" />
+          </div>
+          <div class="input-group">
+            <label for="outsideColorPicker">Outside Color</label>
+            <input type="color" id="outsideColorPicker" class="outside-color" onchange="changeOutsideColor()" />
+          </div>
+        </div>
+        <div class="toolbar toolbar-row second-toolbar">
+          <div class="input-group">
+            <label for="continuousPress">Continuous Press</label>
+            <select id="continuousPress" class="continuous-press" onchange="toggleContinuousPress()">
+              <option value="true">YES</option>
+              <option value="false">NO</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="fillShape">Fill Shape</label>
+            <select id="fillShape" class="fill-shape" onchange="toggleFillShape()">
+              <option value="true">YES</option>
+              <option value="false">NO</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="shapeSizeSpeed">Size by Mouse Speed</label>
+            <select id="shapeSizeSpeed" class="shape-size-speed" onchange="toggleShapeSizeSpeed()">
+              <option value="true">YES</option>
+              <option value="false">NO</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="drawInterval">Drawing Interval</label>
+            <input type="number" id="drawInterval" class="draw-interval" min="1" max="1000" value="40" onchange="changeDrawInterval()" />
           </div>
         </div>
         <canvas class="canvas"></canvas>
-        <div class="toolbar">
-          <div class="toolbar-row">
-            <button onclick="clearCanvas()">Clear canvas</button>
-            <button onclick="downloadCanvas()">Download</button>
-            <button>Upload</button>
-            <button>Share to Facebook</button>
-          </div>
+        <div class="toolbar toolbar-row third-toolbar">
+          <button onclick="clearCanvas()">Clear canvas</button>
+          <button onclick="downloadCanvas()">Download</button>
+          <button>Upload</button>
+          <button>Share to Facebook</button>
         </div>
       </div>
     </main>
