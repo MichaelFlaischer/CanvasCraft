@@ -50,6 +50,16 @@ function changeDrawInterval() {
 function changePicker() {
   const shapePicker = document.getElementById('shapePicker').value
   updateData({ shape: shapePicker })
+  toggleTextInput(shapePicker)
+}
+
+function toggleTextInput(shape) {
+  const textInputGroup = document.getElementById('textInputGroup')
+  if (shape === 'text') {
+    textInputGroup.style.display = 'block'
+  } else {
+    textInputGroup.style.display = 'none'
+  }
 }
 
 function updateSettings() {
@@ -91,6 +101,8 @@ function drawShape(canv, x, y, canvData) {
     drawArrow(canv, x, y, canvData.sizeShape, canvData.drawInside)
   } else if (canvData.shape === 'cloud') {
     drawCloud(canv, x, y, canvData.sizeShape, canvData.drawInside)
+  } else if (canvData.shape === 'text') {
+    drawText(canv, x, y, document.getElementById('textInput').value, canvData.sizeShape)
   }
 }
 
@@ -261,6 +273,13 @@ function drawCloud(canv, x, y, size, drawInside) {
   canv.stroke()
 }
 
+function drawText(canv, x, y, text, size) {
+  canv.font = `${size * 2}px Arial`
+  canv.fillStyle = gCanvData.innerFill
+  canv.fillText(text, x, y)
+  canv.strokeText(text, x, y)
+}
+
 function getCanvasDataUR() {
   const canvas = document.querySelector('.canvas')
   const dataURL = canvas.toDataURL('image/png')
@@ -298,7 +317,6 @@ function onSavePainting(event) {
 
   savePaintingToGallery(paintingName, 'art', artistName, artistEmail)
   showNotification('Painting saved successfully to gallery!')
-  console.log(getSavedPaintings())
   closeSaveToGalleryDialog()
 }
 
@@ -311,4 +329,66 @@ function showNotification(message) {
   setTimeout(() => {
     notification.classList.remove('show')
   }, 3000)
+}
+
+function onImgInput(event) {
+  loadImageFromInput(event, renderImg)
+}
+
+function loadImageFromInput(event, onImageReady) {
+  const reader = new FileReader()
+  reader.onload = function (e) {
+    let img = new Image()
+    img.src = e.target.result
+    img.onload = () => onImageReady(img)
+  }
+  reader.readAsDataURL(event.target.files[0])
+}
+
+function renderImg(img) {
+  const canvas = document.querySelector('.canvas')
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+}
+
+function openUrlDialog() {
+  document.getElementById('urlDialog').style.display = 'flex'
+}
+
+function closeUrlDialog() {
+  document.getElementById('urlDialog').style.display = 'none'
+}
+
+function uploadFromWebUrl() {
+  const imgUrl = document.getElementById('imgUrl').value
+  loadImageFromUrl(imgUrl, renderImg)
+  closeUrlDialog()
+}
+
+function loadImageFromUrl(url, onImageReady) {
+  let img = new Image()
+  img.crossOrigin = 'Anonymous'
+  img.src = url
+  img.onload = () => onImageReady(img)
+  img.onerror = () => showNotification('Failed to load image from URL.')
+}
+
+function renderImg(img) {
+  const canvas = document.querySelector('.canvas')
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+}
+
+function onImgInput(event) {
+  loadImageFromInput(event, renderImg)
+}
+
+function loadImageFromInput(event, onImageReady) {
+  const reader = new FileReader()
+  reader.onload = function (e) {
+    let img = new Image()
+    img.src = e.target.result
+    img.onload = () => onImageReady(img)
+  }
+  reader.readAsDataURL(event.target.files[0])
 }
