@@ -58,6 +58,8 @@ main {
 .main-container {
   grid-column: 2 / 3;
   padding: 1rem;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 footer {

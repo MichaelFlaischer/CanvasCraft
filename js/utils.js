@@ -8,3 +8,7 @@ function getAngle(x1, y1, x2, y2) {
   var aSine = Math.asin(val)
   return aSine
 }
+
+function getBGColor() {
+  return getComputedStyle(document.documentElement).getPropertyValue('--bg-color-main')
+}

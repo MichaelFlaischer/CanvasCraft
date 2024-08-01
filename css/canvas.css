@@ -1,38 +1,69 @@
+/* css/canvas.css */
+
 .toolbar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #fff;
+  background-color: var(--bg-color-light);
   border-radius: 5px;
   box-shadow: var(--box-shadow);
 }
 
-.toolbar input[type='color'],
-.toolbar select,
-.toolbar button {
-  padding: 10px;
+.toolbar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.toolbar-row .input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.toolbar-row .input-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.toolbar-row .input-group input[type='color'],
+.toolbar-row .input-group select,
+.toolbar-row .input-group input[type='range'] {
+  padding: 5px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 0 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: var(--bg-color-main);
+  color: var(--text-color);
 }
 
-.toolbar button:hover,
-.toolbar select:hover,
-.toolbar input[type='color']:hover {
-  background-color: #f0f0f0;
+.toolbar-row .input-group select {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: var(--bg-color-main);
+  color: var(--text-color);
 }
 
 canvas {
-  border: 2px solid #000;
+  border: 2px solid var(--text-color);
   border-radius: 5px;
   height: 80%;
   width: 100%;
   box-shadow: var(--box-shadow);
-  background-color: #fff;
+  background-color: var(--bg-color-main);
 }
 
 button {
@@ -43,9 +74,14 @@ button {
   margin: 10px 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: var(--bg-color-main);
+  color: var(--text-color);
 }
 
-button:hover {
+button:hover,
+.toolbar-row select:hover,
+.toolbar-row input[type='color']:hover,
+.toolbar-row input[type='range']:hover {
   background-color: #f0f0f0;
 }
 
@@ -54,37 +90,7 @@ input[type='color'] {
   width: 40px;
   height: 40px;
   cursor: pointer;
-}
-
-input[type='color']::-webkit-color-swatch-wrapper {
   padding: 0;
-}
-
-input[type='color']::-webkit-color-swatch {
   border: none;
   border-radius: 5px;
-}
-
-.bottom-toolbar {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
-}
-
-.bottom-toolbar button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.bottom-toolbar button:hover {
-  background-color: #f0f0f0;
 }
