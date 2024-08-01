@@ -53,3 +53,14 @@ function getMemePaintings() {
   const paintings = getSavedPaintings()
   return paintings.filter((painting) => painting.type.toLowerCase() === 'meme')
 }
+
+function deletePaintingById(id) {
+  let paintings = JSON.parse(localStorage.getItem('paintings'))
+  if (!paintings) {
+    return
+  }
+
+  paintings = paintings.filter((painting) => painting.id !== id)
+
+  localStorage.setItem('paintings', JSON.stringify(paintings))
+}
